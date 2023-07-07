@@ -1,0 +1,14 @@
+{
+  "name": "development-test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "shopify theme dev --store it-squad.myshopify.com",
+    "pull": "shopify theme pull --store it-squad.myshopify.com",
+    "push": "shopify theme push --store it-squad.myshopify.com"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
