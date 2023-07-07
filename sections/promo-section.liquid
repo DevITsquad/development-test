@@ -1,0 +1,135 @@
+{{ 'promo-section.css' | asset_url | stylesheet_tag }}
+
+{% assign promo = section.settings %}
+
+<div class="promo-section__container promo-section__container--{{ section.id }}">
+  <div class="promo-section__text">
+    <div class="promo-section__text-container">
+      <h2 class="promo-section__title promo-section__title--{{ section.id }}">
+        {{ promo.title }}
+      </h2>
+      <p class="promo-section__subtitle promo-section__subtitle--{{ section.id }}">
+        {{ promo.sub_title }}
+      </p>
+      <a href="{{ promo.button_link }}" class="promo-section__link promo-section__link--{{ section.id }}">
+        {{ promo.button_text }}
+      </a>
+    </div>
+  </div>
+  <div class="promo-section__photo">
+    <ul class="promo-section__photo-list">
+      {% for block in section.blocks %}
+        <li>
+          {{ 
+ block.settings.image
+ | image_url: width: block.settings.image.width
+ | image_tag: width: block.settings.image.width, height: block.settings.image.height
+ }}
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+
+{% style %}
+  .promo-section__container--{{ section.id }}{
+    background-color: {{ promo.background }}
+    ;
+  }
+
+  .promo-section__title--{{ section.id }}{
+    color: {{ promo.color_title }}
+    ;
+  }
+
+  .promo-section__subtitle--{{ section.id }}{
+    color: {{ promo.color_sub_title }}
+    ;
+  }
+
+  .promo-section__link--{{ section.id }}{
+    color: {{ promo.color_button_text }}
+    ;
+    background-color: {{ promo.color_button }}
+    ;
+  }
+{% endstyle %}
+
+{% schema %}
+  {
+    "name": "Promo Section",
+    "tag": "section",
+    "class": "promo-section",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Content"
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title"
+      },
+      {
+        "type": "text",
+        "id": "sub_title",
+        "label": "Sub title"
+      },
+      {
+        "type": "text",
+        "id": "button_text",
+        "label": "Text for button"
+      }, {
+        "type": "url",
+        "id": "button_link",
+        "label": "Link for button"
+      }, {
+        "type": "header",
+        "content": "Colors"
+      }, {
+        "type": "color",
+        "id": "background",
+        "label": "Background Section Color"
+      }, {
+        "type": "color",
+        "id": "color_title",
+        "label": "Color Title",
+        "default": "#1D1D1D"
+      }, {
+        "type": "color",
+        "id": "color_sub_title",
+        "label": "Color Sub title",
+        "default": "#8B89A1"
+      }, {
+        "type": "color",
+        "id": "color_button_text",
+        "label": "Color Button Text",
+        "default": "#fff"
+      }, {
+        "type": "color",
+        "id": "color_button",
+        "label": "Color Button",
+        "default": "#1D1D1D"
+      }
+    ],
+    "max_blocks": 8,
+    "blocks": [
+      {
+        "name": "Image",
+        "type": "Image",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Promo Section"
+      }
+    ]
+  }
+{% endschema %}
